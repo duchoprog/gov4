@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <title>Senate: Attendance</title>
+    <style>
+        .table {
+            border: 1px solid gray
+        }
+    </style>
+</head>
+
+<body class="container">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://www.tgif.com/">TGIF</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="home.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Congress 113</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="senate-data2.html">Senate</a></li>
+                        <li><a href="house-data2.html">House</a></li>
+                    </ul>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Attendance</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Senate</a></li>
+                        <li><a href="house-attendance.html">House</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Party Loyalty</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="senate-loyalty.html">Senate</a></li>
+                        <li><a href="house-loyalty.html">House</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="legislators.html">MD Legislators</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <header>
+        <div>
+        </div>
+    </header>
+    <!--Table container-->
+
+    <div class="row" id="app">
+        <div class="row">
+            <article class="col-sm-6">
+                <h2>Attendance</h2>
+                <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each
+                    house.
+                    Representatives and senators rarely force the presence of a quorum by demanding quorum calls;
+                    thus,
+                    in
+                    most
+                    cases, debates continue even if a majority is not present.</p>
+
+                <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator
+                    stating
+                    "aye"
+                    or "no" when his or her name is announced. The House reserves roll-call votes for the most
+                    formal
+                    matters,
+                    as a roll-call of all 435 representatives takes quite some time; normally, members vote by
+                    electronic
+                    device. In the case of a tie, the motion in question fails. In the Senate, the Vice President
+                    may
+                    (if
+                    present) cast the tiebreaking vote.</p>
+            </article>
+            <div class="col-sm-6">
+                <h3>Senate at a glance</h3>
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>Party</th>
+                            <th>Number of Reps</th>
+                            <th>% Voted with Prty</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAverage">
+                        <tr v-for="(value, key) in lealtad">
+                            <td>{{value.name}}</td>
+                            <td>{{value.cuantos}}</td>
+                            <td>{{value.leal}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Least Engaged (Bottom 10% Attendance)</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of Missed Votes</th>
+                            <th>% Missed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="missedvotes">
+                        <tr v-for="(value, key) in faltantes">
+                            <td>{{value.last_name}}</td>
+                            <td>{{value.missed_votes}}</td>
+                            <td>{{value.pc_falt}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h3>Most Engaged (Top 10% Attendance)</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of Missed Votes</th>
+                            <th>% Missed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="castedvotes">
+                        <tr v-for="(value, key) in votantes">
+                            <td>{{value.last_name}}</td>
+                            <td>{{value.missed_votes}}</td>
+                            <td>{{value.pc_falt}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="pro-congress-113-senate.js"></script> -->
+    <script src="src/mivue.js"></script>
+    <script>
+        let pp_url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+        let pp_opt = {
+            headers: { "X-API-Key": " CLCkTrBF2iMWiWtvWcqXQvF8yRV2HMVtmRSSeB5L" }
+        };
+        cachedFetch(pp_url, pp_opt, "sMembers")
+    </script>
+
+
+
+</body>
+
+</html>
